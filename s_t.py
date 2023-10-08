@@ -7,6 +7,9 @@ import speech_recognition as sr
 
 st.title("Conversión de Audio a Texto")
 
+# Variable para almacenar la transcripción
+transcripcion = ""
+
 st.write("Habla y convierte tu discurso en texto:")
 
 stt_button = Button(label=" Iniciar ", width=200)
@@ -40,8 +43,18 @@ result = streamlit_bokeh_events(
 
 if result:
     if "GET_TEXT" in result:
-        st.write(result.get("GET_TEXT"))
+        transcripcion = result.get("GET_TEXT")
+        st.write(transcripcion)
 
+# Botón para borrar la transcripción y grabar otro audio
+if st.button("Borrar"):
+    transcripcion = ""
+    st.write("Transcripción borrada.")
+
+# Mostrar la transcripción actual
+if transcripcion:
+    st.subheader("Texto convertido del audio:")
+    st.write(transcripcion)
 
 
 
