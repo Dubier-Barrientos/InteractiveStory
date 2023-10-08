@@ -5,6 +5,7 @@ from gtts import gTTS
 import os
 import glob
 import time
+import io
 
 # Función para extraer texto de una imagen
 @st.cache
@@ -106,18 +107,21 @@ elif selected_page == "Reconocimiento de Paciente":
         if drawing_mode:
             # Permitir al usuario dibujar en la imagen
             with drawing_canvas:
-                # Obtener la imagen como un archivo
-                image_file = patient_image.read()
-                image = Image.open(io.BytesIO(image_file))
-
-                # Habilitar el dibujo
-                draw = ImageDraw.Draw(image)
-                drawn_image = st.image(image, caption="Imagen del paciente", use_column_width=True)
-
-                # Lógica de dibujo
-                drawn_image.image = image
-
-                st.write("¡Haz tus anotaciones en la imagen!")
+                try:
+                    # Obtener la imagen como un archivo
+                    image_file = patient_image.read()
+                    image = Image.open(io.BytesIO(image_file))
+        
+                    # Habilitar el dibujo
+                    draw = ImageDraw.Draw(image)
+                    drawn_image = st.image(image, caption="Imagen del paciente", use_column_width=True)
+        
+                    # Lógica de dibujo
+                    drawn_image.image = image
+        
+                    st.write("¡Haz tus anotaciones en la imagen!")
+                except Exception as e:
+                    st.error(f"Error al abrir la imagen: {str(e)}")
 
         else:
             st.write("Habilita el modo de dibujo para hacer anotaciones en la imagen.")
