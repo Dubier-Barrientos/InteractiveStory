@@ -126,7 +126,7 @@ if selected_page == "Historia a audio":
         ),
     )
 
-     def text_translate(input_language, output_language, text, tld):
+    def text_translate(input_language, output_language, text, tld):
         translation = translator.translate(text, src=input_language, dest=output_language)
         trans_text = translation.text
         tts = gTTS(trans_text, lang=output_language, tld=tld, slow=False)
