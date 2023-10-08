@@ -36,6 +36,9 @@ if st.button("Guardar Dibujo"):
         # Guardar la imagen
         image.save("dibujo.png")
         st.success("Dibujo guardado como 'dibujo.png'")
+
+        # Mostrar la imagen guardada
+        st.image(image, use_column_width=True)
     else:
         st.warning("No hay dibujo para guardar.")
 
