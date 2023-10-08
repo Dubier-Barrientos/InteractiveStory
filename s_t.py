@@ -28,7 +28,7 @@ if selected_page == "Historia a audio":
 
     st.markdown("<h1 style='text-align: center; color: #65cafc;'>¡Atrévete a contar tu historia!</h1>", unsafe_allow_html=True)
     
-    image_writing = Image.open('gatito_escribiendo.gif')
+    image_writing = Image.open('write.jpg')
     #.image(image_writing)
 
     left_co, cent_co,last_co = st.columns(3)
@@ -156,7 +156,7 @@ elif selected_page == "Dibujemos una historia":
     st.markdown("<h1 style='text-align: center; color: #65cafc;'>¡Dibujemos una historia juntos!</h1>", unsafe_allow_html=True)
     st.markdown("<h4 style='text-align: center; color: #fff;'>Un lienzo en blanco te espera para que compartas tu creatividad. ¿Te atreves a contarnos tu historia en un dibujo?</h1>", unsafe_allow_html=True)
 
-    image_drawing = Image.open('gatito_dibujo.gif')
+    image_drawing = Image.open('draw.jpg')
     #st.image(image_drawing)
     
     left_co, cent_co,last_co = st.columns(3)
