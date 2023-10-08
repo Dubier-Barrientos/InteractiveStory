@@ -6,3 +6,4 @@ pytesseract
 
 streamlit-drawable-canvas==0.5.0
 numpy>=1.22.2
+matplotlib>=3.3
