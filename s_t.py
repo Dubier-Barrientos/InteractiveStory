@@ -190,12 +190,15 @@ elif selected_page == "Dibujemos una historia":
             st.dataframe(objects)
         else:
             st.warning("No hay dibujo para guardar.")
-    
+
     if st.button("Borrar Todas las Imágenes"):
         historieta.clear()
         st.success("Todas las imágenes borradas.")
 
-
+    if historieta:
+    st.subheader("tus dibujos:")
+    for i, img in enumerate(historieta):
+        st.image(img, use_column_width=True, caption=f"Imagen {i + 1}")
         
 
 
