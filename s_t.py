@@ -81,10 +81,10 @@ if selected_page == "Historia a audio":
         "Selecciona el lenguaje de Entrada",
         ("Inglés", "Español", "Bengalí", "Coreano", "Mandarín", "Japonés", "Italiano"),
     )
-    if in_lang == "Inglés":
-        input_language = "en"
-    elif in_lang == "Español":
+    if in_lang == "Español":
         input_language = "es"
+    elif in_lang == "Inglés":
+        input_language = "en"
     elif in_lang == "Bengalí":
         input_language = "bn"
     elif in_lang == "Coreano":
@@ -171,8 +171,9 @@ elif selected_page == "Dibujemos una historia":
         point_display_radius = st.sidebar.slider("Point display radius: ", 1, 25, 3)
     #Cambiar trazo y color
     stroke_width = st.sidebar.slider("Stroke width: ", 1, 25, 3)
-    stroke_color = st.sidebar.color_picker("Stroke color hex: ")
-    bg_color = st.sidebar.color_picker("Background color hex: ", "#eee")
+    stroke_color = st.sidebar.color_picker("color de trazo: ")
+    bg_color = st.sidebar.color_picker("Color de fondo: ", "#eee")
+    bg_image = st.sidebar.file_uploader("Deseas añadir una imagen al fondo?:", type=["png", "jpg"])
     
     st.empty()
     
@@ -187,6 +188,7 @@ elif selected_page == "Dibujemos una historia":
         stroke_width=stroke_width, 
         stroke_color=stroke_color,  
         background_color=bg_color, 
+        background_image=Image.open(bg_image) if bg_image else None,
         update_streamlit=True,
         drawing_mode=drawing_mode, 
         key="canvas",
