@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit_drawable_canvas import st_canvas
 from PIL import Image, ImageDraw
+import numpy as np
 
 # Configuración de la página
 st.set_page_config(
@@ -26,10 +27,18 @@ canvas_result = st_canvas(
 
 # Botón para guardar el dibujo
 if st.button("Guardar Dibujo"):
-    image = Image.new("RGB", (canvas_result.shape[1], canvas_result.shape[0]), "#FFF")
-    draw = ImageDraw.Draw(image)
-    draw.bitmap((0, 0), canvas_result, fill="#000")  # Copiar el dibujo en la imagen
-    st.image(image, use_column_width=True, caption="Dibujo Guardado")
+    # Obtener el contenido del lienzo como una imagen
+    image_data = canvas_result.image_data
+    if image_data is not None:
+        # Crear una imagen PIL a partir de los datos
+        image = Image.fromarray(np.uint8(image_data))
+        
+        # Guardar la imagen
+        image.save("dibujo.png")
+        st.success("Dibujo guardado como 'dibujo.png'")
+    else:
+        st.warning("No hay dibujo para guardar.")
+
 
 
 
