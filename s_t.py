@@ -15,6 +15,12 @@ except:
 
 historieta = []
 
+#Cambiar trazo
+stroke_width = st.sidebar.slider("Stroke width: ", 1, 25, 3)
+
+#Cambiar color
+stroke_color = st.sidebar.color_picker("Stroke color hex: ")
+
 st.set_page_config(
     page_title="Creación de Historieta",
     page_icon="✏️",
@@ -68,12 +74,6 @@ elif selected_page == "Dibujemos una historia":
     
     #Título de la sección
     st.title("Historieta Interactiva")
-
-    #Cambiar trazo
-    stroke_width = st.sidebar.slider("Stroke width: ", 1, 25, 3)
-
-    #Cambiar color
-    stroke_color = st.sidebar.color_picker("Stroke color hex: ")
     
     st.subheader("Lienzo de Dibujo")
     canvas_result = st_canvas(
