@@ -57,7 +57,11 @@ if selected_page == "Historia a audio":
         st.markdown(f"## Tú audio:")
         st.audio(audio_bytes, format="audio/mp3", start_time=0)
 
+    st.empty()
+    
     st.markdown("---")
+
+    st.empty()
     
     st.subheader("¡También puedes traducirlo!")
     
