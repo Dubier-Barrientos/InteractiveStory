@@ -2,59 +2,51 @@ import streamlit as st
 from streamlit_drawable_canvas import st_canvas
 from PIL import Image, ImageDraw
 import numpy as np
-import matplotlib.pyplot as plt
 
-# Lista para almacenar las imágenes guardadas
 historieta = []
 
-# Configuración del área de dibujo
-drawing_mode = st.checkbox("Modo de Dibujo", False)
-if drawing_mode:
-    st.write("Dibuja algo en el lienzo a continuación:")
-    fig, ax = plt.subplots()
-    canvas = fig.canvas
-    draw = False
+st.set_page_config(
+    page_title="Creación de Historieta",
+    page_icon="✏️",
+    layout="wide"
+)
 
-    def toggle_draw(event):
-        nonlocal draw
-        if event.key == "d":
-            draw = not draw
+st.title("Historieta Interactiva")
 
-    canvas.mpl_connect("key_press_event", toggle_draw)
 
-    x, y = [], []
+st.subheader("Lienzo de Dibujo")
+canvas_result = st_canvas(
+    fill_color="rgba(255, 255, 255, 0)",  # Color de fondo transparente
+    stroke_width=5,  # Grosor de la línea
+    stroke_color="#000",  # Color de línea (negro)
+    background_color="#FFF",  # Color de fondo blanco
+    drawing_mode="freedraw",  # Modo de dibujo libre
+    key="canvas",
+    height=300  # Altura del lienzo de dibujo
+)
 
-    def on_mouse_move(event):
-        if draw:
-            x.append(event.xdata)
-            y.append(event.ydata)
-            ax.plot(x, y, color="black")
-            canvas.draw()
 
-    canvas.mpl_connect("motion_notify_event", on_mouse_move)
-
-# Botón para guardar el dibujo actual
 if st.button("Guardar Dibujo"):
-    if drawing_mode:
-        # Guarda la imagen actual en la lista de historietas
-        buf = canvas.buffer_rgba()
-        historieta.append(np.array(buf))
+    image_data = canvas_result.image_data
+    if image_data is not None:
+        image = Image.fromarray(np.uint8(image_data))
 
-        # Borra el lienzo
-        ax.clear()
-        canvas.draw()
+        new_size = (300, 300)
+        image = image.resize(new_size)
+        
+        historieta.append(image)
 
-# Botón para borrar el lienzo y las imágenes guardadas
-if st.button("Borrar Historieta"):
+        st.image(image, use_column_width=True, caption=f"Imagen {len(historieta)}")
+
+        if st.button(f"Borrar Imagen {len(historieta)}"):
+            del historieta[-1]
+            st.success(f"Imagen {len(historieta) + 1} borrada.")
+    else:
+        st.warning("No hay dibujo para guardar.")
+
+if st.button("Borrar Todas las Imágenes"):
     historieta.clear()
-    ax.clear()
-    canvas.draw()
-
-# Mostrar las imágenes guardadas como una historieta
-if historieta:
-    st.write("Historieta:")
-    for i, imagen in enumerate(historieta, start=1):
-        st.image(imagen, caption=f"Imagen {i}", use_column_width=True)
+    st.success("Todas las imágenes borradas.")
 
 
 
