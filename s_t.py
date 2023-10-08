@@ -174,7 +174,6 @@ elif selected_page == "Dibujemos una historia":
         drawing_mode=drawing_mode, 
         key="canvas",
         height=300,
-        reset_canvas_on_button_click=True
     )
     
     
