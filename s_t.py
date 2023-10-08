@@ -156,19 +156,25 @@ elif selected_page == "Dibujemos una historia":
     with cent_co:
         st.image(image_drawing)
 
+    drawing_mode = st.sidebar.selectbox(
+        "Drawing tool:",
+        ("freedraw", "line", "rect", "circle", "transform", "polygon", "point"),
+    )
+    
     #Cambiar trazo y color
     stroke_width = st.sidebar.slider("Stroke width: ", 1, 25, 3)
     stroke_color = st.sidebar.color_picker("Stroke color hex: ")
     
     st.subheader("Lienzo de Dibujo")
     canvas_result = st_canvas(
-        fill_color="rgba(255, 255, 255, 0)",  # Color de fondo transparente
-        stroke_width=stroke_width,  # Grosor de la línea
-        stroke_color=stroke_color,  # Color de línea (negro)
-        background_color="#FFF",  # Color de fondo blanco
-        drawing_mode="freedraw",  # Modo de dibujo libre
+        fill_color="rgba(255, 255, 255, 0)", 
+        stroke_width=stroke_width, 
+        stroke_color=stroke_color,  
+        background_color="#FFF",  
+        drawing_mode=drawing_mode, 
         key="canvas",
-        height=300  # Altura del lienzo de dibujo
+        height=300  
+        reset_canvas_on_button_click=True
     )
     
     
