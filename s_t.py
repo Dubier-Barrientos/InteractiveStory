@@ -36,7 +36,15 @@ if st.button("Guardar Dibujo"):
         
         historieta.append(image)
 
-        canvas_result.clear_drawing()
+        canvas_result = st.canvas(
+            fill_color="rgba(255, 255, 255, 1)",
+            stroke_width=5,
+            stroke_color="black",
+            background_color="#FFF",
+            height=300,
+            drawing_mode="freedraw",
+            key="canvas",
+        )
 
         st.image(image, use_column_width=True, caption=f"Imagen {len(historieta)}")
 
