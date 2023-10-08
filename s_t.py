@@ -15,17 +15,15 @@ except:
 
 historieta = []
 
-#Cambiar trazo
-stroke_width = st.sidebar.slider("Stroke width: ", 1, 25, 3)
-
-#Cambiar color
-stroke_color = st.sidebar.color_picker("Stroke color hex: ")
-
 st.set_page_config(
     page_title="Creación de Historieta",
     page_icon="✏️",
     layout="wide"
 )
+
+#Cambiar trazo y color
+stroke_width = st.sidebar.slider("Stroke width: ", 1, 25, 3)
+stroke_color = st.sidebar.color_picker("Stroke color hex: ")
 
 selected_page = st.sidebar.radio("Selecciona una opción:", ["Historia a audio", "Dibujemos una historia"])
 
