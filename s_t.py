@@ -183,10 +183,11 @@ elif selected_page == "Dibujemos una historia":
             historieta.append(image)
     
             st.image(image, use_column_width=True, caption=f"Imagen {len(historieta)}")
-    
-            if st.button(f"Borrar Imagen {len(historieta)}"):
-                del historieta[-1]
-                st.success(f"Imagen {len(historieta) + 1} borrada.")
+
+            objects = pd.json_normalize(canvas_result.json_data["objects"])
+            for col in objects.select_dtypes(include=["object"]).columns:
+                objects[col] = objects[col].astype("str")
+            st.dataframe(objects)
         else:
             st.warning("No hay dibujo para guardar.")
     
@@ -194,11 +195,8 @@ elif selected_page == "Dibujemos una historia":
         historieta.clear()
         st.success("Todas las imágenes borradas.")
 
-    if canvas_result.json_data is not None:
-        objects = pd.json_normalize(canvas_result.json_data["objects"])
-        for col in objects.select_dtypes(include=["object"]).columns:
-            objects[col] = objects[col].astype("str")
-        st.dataframe(objects)
+
+        
 
 
 
