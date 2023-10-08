@@ -57,7 +57,7 @@ if selected_page == "Historia a audio":
     st.subheader("¡También puedes traducirlo!")
     
     # Resultado de la traducción
-    result = st.text_area("Texto Traducido", "")
+    result = text
     
     # Crea un directorio temporal para almacenar archivos de audio
     try:
