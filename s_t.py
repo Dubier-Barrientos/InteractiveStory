@@ -1,5 +1,5 @@
 import streamlit as st
-import speech_recognition as sr
+import subprocess
 
 # Título de la aplicación
 st.title("Conversión de Audio a Texto")
@@ -8,29 +8,20 @@ st.title("Conversión de Audio a Texto")
 if st.button("Iniciar Grabación"):
     st.write("Habla ahora...")
 
-    # Crear un objeto Recognizer
-    recognizer = sr.Recognizer()
+    # Utilizar el comando "arecord" para grabar audio en un archivo WAV
+    audio_file = "audio.wav"
+    record_command = f"arecord -d 5 -f S16_LE -r 16000 {audio_file}"
+    subprocess.run(record_command, shell=True)
+    st.write("Grabación completada. Procesando...")
 
-    # Abrir el micrófono
-    with sr.Microphone() as source:
-        try:
-            # Escuchar el audio
-            audio_data = recognizer.listen(source)
-            st.write("Grabación completada. Procesando...")
-
-            # Convertir el audio a texto utilizando el reconocimiento de Google
-            text = recognizer.recognize_google(audio_data)
-
-            # Mostrar el texto convertido
-            st.subheader("Texto convertido del audio:")
-            st.write(text)
-        except sr.WaitTimeoutError:
-            st.write("No se detectó ninguna entrada de audio.")
-        except sr.RequestError as e:
-            st.error(f"Error en la solicitud de reconocimiento de voz: {e}")
-
-# Nota informativa
-st.info("Nota: Haga clic en 'Iniciar Grabación' para comenzar a grabar. La grabación se detendrá automáticamente después de unos segundos de silencio.")
+    # Utilizar el comando "pocketsphinx_continuous" para convertir audio a texto
+    speech_to_text_command = f"pocketsphinx_continuous -infile {audio_file} -hmm /usr/local/share/pocketsphinx/model/en-us/en-us -lm /usr/local/share/pocketsphinx/model/en-us/en-us.lm.bin -dict /usr/local/share/pocketsphinx/model/en-us/cmudict-en-us.dict"
+    result = subprocess.run(speech_to_text_command, shell=True, capture_output=True, text=True)
+    
+    # Mostrar el texto convertido
+    text = result.stdout.strip()
+    st.subheader("Texto convertido del audio:")
+    st.write(text)
            
 
 
