@@ -128,7 +128,7 @@ if selected_page == "Historia a audio":
 
         if display_output_text:
             st.markdown(f"## Texto de salida:")
-            st.write(f" {output_text}")
+            st.write(trans_text)
     
     
     # Función para eliminar archivos antiguos
