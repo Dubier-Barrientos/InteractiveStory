@@ -36,8 +36,6 @@ if st.button("Guardar Dibujo"):
         
         historieta.append(image)
 
-        draw.rectangle(((0, 0), (canvas.image.width, canvas.image.height)), fill="white", outline="white")
-
         st.image(image, use_column_width=True, caption=f"Imagen {len(historieta)}")
 
         if st.button(f"Borrar Imagen {len(historieta)}"):
