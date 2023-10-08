@@ -5,7 +5,8 @@ from gtts import gTTS
 import os
 import glob
 import time
-import wikipediaapi
+import cv2
+import numpy as np
 
 # Función para extraer texto de una imagen
 @st.cache
