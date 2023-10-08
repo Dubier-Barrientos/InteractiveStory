@@ -22,9 +22,9 @@ st.set_page_config(
     layout="wide"
 )
 
-selected_page = st.sidebar.radio("Selecciona una opción:", ["Historia a audio", "Dibujemos una historia"])
+selected_page = st.sidebar.radio("Selecciona una opción:", ["Cuenta y escucha", "Dibujemos una historia"])
 
-if selected_page == "Historia a audio":
+if selected_page == "Cuenta y escucha":
 
     st.markdown("<h1 style='text-align: center; color: #65cafc;'>¡Atrévete a contar tu historia!</h1>", unsafe_allow_html=True)
 
