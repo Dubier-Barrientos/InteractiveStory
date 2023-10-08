@@ -3,6 +3,9 @@ from streamlit_drawable_canvas import st_canvas
 from PIL import Image, ImageDraw
 import numpy as np
 
+# Lista para almacenar las imágenes
+historieta = []
+
 # Configuración de la página
 st.set_page_config(
     page_title="Creación de Historieta",
@@ -33,14 +36,26 @@ if st.button("Guardar Dibujo"):
         # Crear una imagen PIL a partir de los datos
         image = Image.fromarray(np.uint8(image_data))
         
-        # Guardar la imagen
-        image.save("dibujo.png")
-        st.success("Dibujo guardado como 'dibujo.png'")
+        # Agregar la imagen a la lista de historietas
+        historieta.append(image)
+
+        # Limpiar el lienzo
+        canvas_result.clear_drawing()
 
         # Mostrar la imagen guardada
-        st.image(image, use_column_width=True)
+        st.image(image, use_column_width=True, caption=f"Imagen {len(historieta)}")
+
+        # Botón para borrar la imagen actual
+        if st.button(f"Borrar Imagen {len(historieta)}"):
+            del historieta[-1]
+            st.success(f"Imagen {len(historieta) + 1} borrada.")
     else:
         st.warning("No hay dibujo para guardar.")
+
+# Botón para borrar todas las imágenes
+if st.button("Borrar Todas las Imágenes"):
+    historieta.clear()
+    st.success("Todas las imágenes borradas.")
 
 
 
