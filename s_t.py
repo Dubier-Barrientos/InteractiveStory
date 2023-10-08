@@ -127,6 +127,11 @@ if selected_page == "Historia a audio":
         # Muestra el audio traducido
         st.markdown(f"## Tú audio traducido:")
         st.audio(f"temp/{my_file_name}.mp3", format="audio/mp3", start_time=0)
+
+        if display_output_text:
+            st.markdown(f"## Texto de salida:")
+            st.write(f" {output_text}")
+    
     
     # Función para eliminar archivos antiguos
     def remove_files(n):
