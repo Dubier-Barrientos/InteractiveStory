@@ -2,6 +2,11 @@ import streamlit as st
 from streamlit_drawable_canvas import st_canvas
 from PIL import Image, ImageDraw
 import numpy as np
+import os
+import time
+import glob
+import os
+from gtts import gTTS
 
 try:
     os.mkdir("temp")
