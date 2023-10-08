@@ -1,33 +1,46 @@
+import os
 import streamlit as st
+from bokeh.models.widgets import Button
+from bokeh.models import CustomJS
+from streamlit_bokeh_events import streamlit_bokeh_events
 import speech_recognition as sr
 
-# Título de la aplicación
 st.title("Conversión de Audio a Texto")
 
-# Subir archivo de audio
-audio_file = st.file_uploader("Cargar archivo de audio (formato compatible: WAV, FLAC, etc.)", type=["wav", "flac"])
+st.write("Habla y convierte tu discurso en texto:")
 
-# Verificar si se ha cargado un archivo
-if audio_file:
-    st.write("Procesando archivo de audio...")
+stt_button = Button(label=" Iniciar ", width=200)
 
-    # Crear un objeto Recognizer
-    recognizer = sr.Recognizer()
+stt_button.js_on_event("button_click", CustomJS(code="""
+    var recognition = new webkitSpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+ 
+    recognition.onresult = function (e) {
+        var value = "";
+        for (var i = e.resultIndex; i < e.results.length; ++i) {
+            if (e.results[i].isFinal) {
+                value += e.results[i][0].transcript;
+            }
+        }
+        if (value !== "") {
+            document.dispatchEvent(new CustomEvent("GET_TEXT", {detail: value}));
+        }
+    }
+    recognition.start();
+    """))
 
-    # Leer el archivo de audio
-    audio_data = sr.AudioFile(audio_file)
+result = streamlit_bokeh_events(
+    stt_button,
+    events="GET_TEXT",
+    key="listen",
+    refresh_on_update=False,
+    override_height=75,
+    debounce_time=0)
 
-    # Iniciar la conversión de audio a texto
-    with audio_data as source:
-        try:
-            audio_text = recognizer.record(source)
-            text = recognizer.recognize_google(audio_text)
-            st.subheader("Texto convertido del audio:")
-            st.write(text)
-        except sr.UnknownValueError:
-            st.warning("No se pudo reconocer el audio.")
-        except sr.RequestError as e:
-            st.error(f"Error en la solicitud de reconocimiento de voz: {e}")
+if result:
+    if "GET_TEXT" in result:
+        st.write(result.get("GET_TEXT"))
 
 
 
