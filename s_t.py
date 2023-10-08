@@ -142,6 +142,9 @@ elif selected_page == "Dibujemos una historia":
     #Título de la sección
     st.title("¡Aquí puedes dibujar la historia que te imagines!")
 
+    image_drawing = Image.open('gatito_dibujo.gif')
+    st.image(image_drawing)
+
     #Cambiar trazo y color
     stroke_width = st.sidebar.slider("Stroke width: ", 1, 25, 3)
     stroke_color = st.sidebar.color_picker("Stroke color hex: ")
