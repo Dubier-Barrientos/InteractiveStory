@@ -31,7 +31,7 @@ if st.button("Guardar Dibujo"):
     if image_data is not None:
         image = Image.fromarray(np.uint8(image_data))
 
-        new_size = (300, 300)
+        new_size = (100, 100)
         image = image.resize(new_size)
         
         historieta.append(image)
