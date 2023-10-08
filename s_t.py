@@ -26,7 +26,7 @@ selected_page = st.sidebar.radio("Selecciona una opción:", ["Historia a audio",
 
 if selected_page == "Historia a audio":
 
-    st.markdown("<h1 style='text-align: center; color: blue;'>¡Atrévete a contar tu historia!</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: #CA2222;'>¡Atrévete a contar tu historia!</h1>", unsafe_allow_html=True)
     
     image_writing = Image.open('gatito_escribiendo.gif')
     #.image(image_writing)
