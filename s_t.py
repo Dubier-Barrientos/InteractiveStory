@@ -153,7 +153,8 @@ if selected_page == "Historia a audio":
 elif selected_page == "Dibujemos una historia":
     
     #Título de la sección
-    st.markdown("<h1 style='text-align: center; color: #65cafc;'>¡Aquí puedes dibujar la historia que te imagines!</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: #65cafc;'>¡Dibujemos una historia juntos!</h1>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: #fff;'>Cuéntanos una historia en una imagen</h1>", unsafe_allow_html=True)
 
     image_drawing = Image.open('gatito_dibujo.gif')
     #st.image(image_drawing)
@@ -173,6 +174,11 @@ elif selected_page == "Dibujemos una historia":
     stroke_color = st.sidebar.color_picker("Stroke color hex: ")
     bg_color = st.sidebar.color_picker("Background color hex: ", "#eee")
     
+    st.empty()
+    
+    st.markdown("---")
+
+    st.empty()
     
     st.subheader("Lienzo de Dibujo")
     canvas_result = st_canvas(
@@ -186,6 +192,11 @@ elif selected_page == "Dibujemos una historia":
         height=300,
     )
     
+    st.empty()
+    
+    st.markdown("---")
+
+    st.empty()
     
     if st.button("Guardar imagen"):
         image_data = canvas_result.image_data
