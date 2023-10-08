@@ -189,7 +189,8 @@ elif selected_page == "Dibujemos una historia":
         update_streamlit=True,
         drawing_mode=drawing_mode, 
         key="canvas",
-        height=300,
+        height=700,
+        width = 800
     )
     
     st.empty()
