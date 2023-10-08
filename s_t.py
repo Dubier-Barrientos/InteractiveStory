@@ -39,7 +39,7 @@ if selected_page == "Cuenta y escucha":
 
     # Texto de entrada del usuario
     text = st.text_input("¿Tienes algo para contar?")
-    tld = "es"
+    tld = "com"
     
     # Función para convertir texto a audio
     def text_to_speech(text, tld):
