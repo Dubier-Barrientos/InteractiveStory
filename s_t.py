@@ -97,7 +97,7 @@ elif selected_page == "Reconocimiento de Paciente":
     if st.button("Buscar Información Médica"):
         if patient_name:
             # Conexión a la API de Wikipedia
-            wiki_wiki = wikipediaapi.Wikipedia('es')
+            wiki_wiki = wikipediaapi.Wikipedia("es")
             
             # Realizar la búsqueda en Wikipedia
             page = wiki_wiki.page(patient_name)
