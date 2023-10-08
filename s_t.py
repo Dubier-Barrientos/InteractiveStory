@@ -158,9 +158,18 @@ elif selected_page == "Dibujemos una historia":
     image_drawing = Image.open('gatito_dibujo.gif')
     #st.image(image_drawing)
     
-    with st.beta_container():
-        # Cargar y mostrar la imagen
+    # Crear una columna para centrar la imagen
+    col1, col2, col3 = st.beta_columns([1, 3, 1])  # Proporciones de las columnas
+    
+    # Dejar una columna vacía a la izquierda para centrar la imagen
+    col1.write("")
+    
+    # Mostrar la imagen en la columna central
+    with col2:
         st.image(image_drawing, use_column_width=True)
+    
+    # Dejar una columna vacía a la derecha
+    col3.write("")
 
     #Cambiar trazo y color
     stroke_width = st.sidebar.slider("Stroke width: ", 1, 25, 3)
