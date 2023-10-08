@@ -26,7 +26,7 @@ selected_page = st.sidebar.radio("Selecciona una opción:", ["Historia a audio",
 
 if selected_page == "Historia a audio":
 
-    st.markdown("<h1 style='text-align: center; color: #CA2222;'>¡Atrévete a contar tu historia!</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: #65cafc;'>¡Atrévete a contar tu historia!</h1>", unsafe_allow_html=True)
     
     image_writing = Image.open('gatito_escribiendo.gif')
     #.image(image_writing)
@@ -153,7 +153,7 @@ if selected_page == "Historia a audio":
 elif selected_page == "Dibujemos una historia":
     
     #Título de la sección
-    st.title("¡Aquí puedes dibujar la historia que te imagines!")
+    st.markdown("<h1 style='text-align: center; color: #65cafc;'>¡Aquí puedes dibujar la historia que te imagines!</h1>", unsafe_allow_html=True)
 
     image_drawing = Image.open('gatito_dibujo.gif')
     #st.image(image_drawing)
