@@ -1,28 +1,34 @@
 import streamlit as st
-import subprocess
+import speech_recognition as sr
 
 # Título de la aplicación
 st.title("Conversión de Audio a Texto")
 
-# Crear un botón para iniciar la grabación de audio
-if st.button("Iniciar Grabación"):
-    st.write("Habla ahora...")
+# Subir archivo de audio
+audio_file = st.file_uploader("Cargar archivo de audio (formato compatible: WAV, FLAC, etc.)", type=["wav", "flac"])
 
-    # Utilizar el comando "arecord" para grabar audio en un archivo WAV
-    audio_file = "audio.wav"
-    record_command = f"arecord -d 5 -f S16_LE -r 16000 {audio_file}"
-    subprocess.run(record_command, shell=True)
-    st.write("Grabación completada. Procesando...")
+# Verificar si se ha cargado un archivo
+if audio_file:
+    st.write("Procesando archivo de audio...")
 
-    # Utilizar el comando "pocketsphinx_continuous" para convertir audio a texto
-    speech_to_text_command = f"pocketsphinx_continuous -infile {audio_file} -hmm /usr/local/share/pocketsphinx/model/en-us/en-us -lm /usr/local/share/pocketsphinx/model/en-us/en-us.lm.bin -dict /usr/local/share/pocketsphinx/model/en-us/cmudict-en-us.dict"
-    result = subprocess.run(speech_to_text_command, shell=True, capture_output=True, text=True)
-    
-    # Mostrar el texto convertido
-    text = result.stdout.strip()
-    st.subheader("Texto convertido del audio:")
-    st.write(text)
-           
+    # Crear un objeto Recognizer
+    recognizer = sr.Recognizer()
+
+    # Leer el archivo de audio
+    audio_data = sr.AudioFile(audio_file)
+
+    # Iniciar la conversión de audio a texto
+    with audio_data as source:
+        try:
+            audio_text = recognizer.record(source)
+            text = recognizer.recognize_google(audio_text)
+            st.subheader("Texto convertido del audio:")
+            st.write(text)
+        except sr.UnknownValueError:
+            st.warning("No se pudo reconocer el audio.")
+        except sr.RequestError as e:
+            st.error(f"Error en la solicitud de reconocimiento de voz: {e}")
+
 
 
         
