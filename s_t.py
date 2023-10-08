@@ -155,7 +155,7 @@ if selected_page == "Cuenta y escucha":
 elif selected_page == "Dibujemos una historia":
     
     #Título de la sección
-    st.markdown("<h1 style='text-align: center; color: #65cafc; margin-bottom: 10px;'>¡Dibujemos una historia juntos!</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: #65cafc;'>¡Dibujemos una historia juntos!</h1>", unsafe_allow_html=True)
     st.markdown("<h4 style='text-align: center; color: #fff;'>Un lienzo en blanco te espera para que compartas tu creatividad. ¿Te atreves a contarnos tu historia en un dibujo?</h1>", unsafe_allow_html=True)
 
     st.text(" ")
