@@ -181,7 +181,7 @@ elif selected_page == "Dibujemos una historia":
     )
     
     
-    if st.button("Guardar como PNG"):
+    if st.button("Guardar imagen"):
         image_data = canvas_result.image_data
         if image_data is not None:
             image = Image.fromarray(np.uint8(image_data))
@@ -190,8 +190,8 @@ elif selected_page == "Dibujemos una historia":
             image.save("canvas_image.png", "PNG")
             
             # Mostrar un enlace para descargar la imagen
-            st.markdown("Descarga la imagen generada:")
-            st.download_button(label="Descargar PNG", data=open("canvas_image.png", "rb").read(), file_name="canvas_image.png", key="download-button")
+            st.markdown("Ya puedes descargar tu imagen:")
+            st.download_button(label="Descargar", data=open("canvas_image.png", "rb").read(), file_name="canvas_image.png", key="download-button")
         else:
             st.warning("No hay dibujo para guardar.")
 
