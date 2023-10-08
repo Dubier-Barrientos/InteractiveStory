@@ -168,13 +168,13 @@ elif selected_page == "Dibujemos una historia":
         st.image(image_drawing)
 
     drawing_mode = st.sidebar.selectbox(
-        "Drawing tool:",
+        "Pinceles:",
         ("freedraw", "line", "rect", "circle", "transform", "point"),
     )
     if drawing_mode == "point":
         point_display_radius = st.sidebar.slider("Point display radius: ", 1, 25, 3)
     #Cambiar trazo y color
-    stroke_width = st.sidebar.slider("Stroke width: ", 1, 25, 3)
+    stroke_width = st.sidebar.slider("Grosor de trazo: ", 1, 25, 3)
     stroke_color = st.sidebar.color_picker("color de trazo: ")
     bg_color = st.sidebar.color_picker("Color de fondo: ", "#eee")
     
