@@ -5,8 +5,6 @@ from gtts import gTTS
 import os
 import glob
 import time
-import cv2
-import numpy as np
 
 # Función para extraer texto de una imagen
 @st.cache
@@ -90,39 +88,6 @@ if selected_page == "Transcripción y Audio":
 elif selected_page == "Reconocimiento de Paciente":
       # Título de la sección
     st.title("Reconocimiento de Paciente")
-    
-    # Subir la imagen para el reconocimiento
-    image_file_patient = st.file_uploader("Cargar imagen para el reconocimiento (formato compatible: PNG, JPG, JPEG)", type=["png", "jpg", "jpeg"])
-    
-    # Variable para almacenar el diagnóstico
-    diagnosis_text = ""
-
-    if image_file_patient is not None:
-        # Mostrar la imagen cargada
-        st.image(image_file_patient, caption="Imagen para el reconocimiento", use_column_width=True)
-
-        # Botón para realizar el reconocimiento
-        if st.button("Realizar reconocimiento"):
-            # Leer la imagen
-            image_patient = Image.open(image_file_patient)
-            
-            # Convertir la imagen a un formato que OpenCV pueda procesar (numpy array)
-            img_cv = np.array(image_patient)
-            
-            # Cargar el modelo Haar Cascade para detección de rostros
-            face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-            
-            # Convertir la imagen a escala de grises para la detección
-            gray = cv2.cvtColor(img_cv, cv2.COLOR_BGR2GRAY)
-            
-            # Realizar la detección de rostros
-            faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
-            
-            if len(faces) > 0:
-                # Si se detecta al menos un rostro, mostrar el diagnóstico
-                diagnosis_text = "Se ha detectado un rostro. Aquí está su diagnóstico: [Insertar texto del diagnóstico aquí]"
-            else:
-                diagnosis_text = "No se ha detectado ningún rostro en la imagen."   
 
 # Limpiar archivos antiguos
 remove_files(7)
