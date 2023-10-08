@@ -1,9 +1,10 @@
 import streamlit as st
 from streamlit_drawable_canvas import st_canvas
+from PIL import Image
 
 st.title("Drawable Canvas")
 st.markdown("""
-Draw on the canvas, get the image data back into Python !
+Draw on the canvas, get the image data back into Python!
 * Doubleclick to remove the selected object when not in drawing mode
 """)
 st.sidebar.header("Configuration")
@@ -21,7 +22,12 @@ image_data = st_canvas(
 
 # Do something interesting with the image data
 if image_data is not None:
-    st.image(image_data)
+    # Convert the numpy array to a PIL image
+    pil_image = Image.fromarray(image_data)
+
+    # Display the PIL image
+    st.image(pil_image)
+
 
 
 
