@@ -65,16 +65,21 @@ if selected_page == "Historia a audio":
     remove_files(7)
     
 elif selected_page == "Dibujemos una historia":
-
+    
     #Título de la sección
     st.title("Historieta Interactiva")
-    
+
+    #Cambiar trazo
+    stroke_width = st.sidebar.slider("Stroke width: ", 1, 25, 3)
+
+    #Cambiar color
+    stroke_color = st.sidebar.color_picker("Stroke color hex: ")
     
     st.subheader("Lienzo de Dibujo")
     canvas_result = st_canvas(
         fill_color="rgba(255, 255, 255, 0)",  # Color de fondo transparente
-        stroke_width=5,  # Grosor de la línea
-        stroke_color="#000",  # Color de línea (negro)
+        stroke_width=stroke_width,  # Grosor de la línea
+        stroke_color=stroke_color,  # Color de línea (negro)
         background_color="#FFF",  # Color de fondo blanco
         drawing_mode="freedraw",  # Modo de dibujo libre
         key="canvas",
