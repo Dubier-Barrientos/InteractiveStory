@@ -27,9 +27,14 @@ selected_page = st.sidebar.radio("Selecciona una opción:", ["Historia a audio",
 if selected_page == "Historia a audio":
 
     st.markdown("<h1 style='text-align: center; color: blue;'>¡Atrévete a contar tu historia!</h1>", unsafe_allow_html=True)
-
+    
     image_writing = Image.open('gatito_escribiendo.gif')
-    st.image(image_writing)
+    #.image(image_writing)
+
+    with st.beta_container():
+        # Cargar y mostrar la imagen
+        st.image(image_writing, use_column_width=True)
+
     
     # Texto de entrada del usuario
     text = st.text_input("¿Tienes algo para contar?")
@@ -143,7 +148,11 @@ elif selected_page == "Dibujemos una historia":
     st.title("¡Aquí puedes dibujar la historia que te imagines!")
 
     image_drawing = Image.open('gatito_dibujo.gif')
-    st.image(image_drawing)
+    #st.image(image_drawing)
+    
+    with st.beta_container():
+        # Cargar y mostrar la imagen
+        st.image(image_drawing, use_column_width=True)
 
     #Cambiar trazo y color
     stroke_width = st.sidebar.slider("Stroke width: ", 1, 25, 3)
