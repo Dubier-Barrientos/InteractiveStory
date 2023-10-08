@@ -66,6 +66,9 @@ if selected_page == "Cuenta y escucha":
     st.empty()
     
     st.subheader("¡También puedes traducirlo!")
+
+    image_trans = Image.open('translate.jpg')
+    st.image(image_trans)
     
     # Resultado de la traducción
     result = text
