@@ -70,7 +70,7 @@ if transcription_completed:
 st.title("Texto a Audio")
 translator = Translator()
 
-text = st.text_area("Texto a traducir", ""
+text = st.text_area("Texto a traducir", "")
 
 
         
