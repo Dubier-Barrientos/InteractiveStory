@@ -3,52 +3,34 @@ from streamlit_drawable_canvas import st_canvas
 from PIL import Image, ImageDraw
 import numpy as np
 
+# Lista para almacenar las imágenes guardadas
 historieta = []
 
-st.set_page_config(
-    page_title="Creación de Historieta",
-    page_icon="✏️",
-    layout="wide"
-)
+# Configuración del área de dibujo
+drawing_mode = st.checkbox("Modo de Dibujo", False)
+if drawing_mode:
+    st.write("Dibuja algo en el lienzo a continuación:")
+    canvas = st.image(None, caption="Lienzo", use_column_width=True, channels="RGB")
+    draw = ImageDraw.Draw(canvas.image)
 
-st.title("Historieta Interactiva")
-
-
-st.subheader("Lienzo de Dibujo")
-canvas_result = st_canvas(
-    fill_color="rgba(255, 255, 255, 0)",  # Color de fondo transparente
-    stroke_width=5,  # Grosor de la línea
-    stroke_color="#000",  # Color de línea (negro)
-    background_color="#FFF",  # Color de fondo blanco
-    drawing_mode="freedraw",  # Modo de dibujo libre
-    key="canvas",
-    height=300  # Altura del lienzo de dibujo
-)
-
-
+# Botón para guardar el dibujo actual
 if st.button("Guardar Dibujo"):
-    image_data = canvas_result.image_data
-    if image_data is not None:
-        image = Image.fromarray(np.uint8(image_data))
+    if drawing_mode:
+        # Crea una copia de la imagen actual y la agrega a la lista de historietas
+        historieta.append(canvas.image.copy())
 
-        new_size = (300, 300)
-        image = image.resize(new_size)
-        
-        historieta.append(image)
-
+        # Borra el dibujo en el lienzo
         draw.rectangle(((0, 0), (canvas.image.width, canvas.image.height)), fill="white", outline="white")
 
-        st.image(image, use_column_width=True, caption=f"Imagen {len(historieta)}")
-
-        if st.button(f"Borrar Imagen {len(historieta)}"):
-            del historieta[-1]
-            st.success(f"Imagen {len(historieta) + 1} borrada.")
-    else:
-        st.warning("No hay dibujo para guardar.")
-
-if st.button("Borrar Todas las Imágenes"):
+# Botón para borrar el lienzo y las imágenes guardadas
+if st.button("Borrar Historieta"):
     historieta.clear()
-    st.success("Todas las imágenes borradas.")
+
+# Mostrar las imágenes guardadas como una historieta
+if historieta:
+    st.write("Historieta:")
+    for i, imagen in enumerate(historieta, start=1):
+        st.image(imagen, caption=f"Imagen {i}", use_column_width=True)
 
 
 
