@@ -64,14 +64,14 @@ if selected_page == "Historia a audio":
     debounce_time=0)
 
     if result:
-    if "GET_TEXT" in result:
-        st.write(result.get("GET_TEXT"))
-    try:
-        os.mkdir("temp")
-    except:
-        pass
-    st.title("Texto a Audio")
-    translator = Translator()
+        if "GET_TEXT" in result:
+            st.write(result.get("GET_TEXT"))
+        try:
+            os.mkdir("temp")
+        except:
+            pass
+        st.title("Texto a Audio")
+        translator = Translator()
     
     text = str(result.get("GET_TEXT"))
     in_lang = st.selectbox(
