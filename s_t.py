@@ -32,8 +32,8 @@ if selected_page == "Historia a audio":
     #.image(image_writing)
 
     left_co, cent_co,last_co = st.columns(3)
-        with cent_co:
-    st.image(image_writing)
+    with cent_co:
+        st.image(image_writing)
 
     # Texto de entrada del usuario
     text = st.text_input("¿Tienes algo para contar?")
@@ -150,8 +150,8 @@ elif selected_page == "Dibujemos una historia":
     #st.image(image_drawing)
     
     left_co, cent_co,last_co = st.columns(3)
-        with cent_co:
-    st.image(image_drawing)
+    with cent_co:
+        st.image(image_drawing)
 
     #Cambiar trazo y color
     stroke_width = st.sidebar.slider("Stroke width: ", 1, 25, 3)
