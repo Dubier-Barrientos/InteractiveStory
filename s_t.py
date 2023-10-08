@@ -6,6 +6,7 @@ import os
 import glob
 import time
 import io
+from streamlit_drawable_canvas import st_canvas
 
 # Función para extraer texto de una imagen
 @st.cache
@@ -87,7 +88,7 @@ if selected_page == "Transcripción y Audio":
 
 # Reconocimiento de Paciente
 elif selected_page == "Reconocimiento de Paciente":
-      # Título de la sección
+    # Título de la sección
     st.title("Reconocimiento de Paciente")
 
     # Subir la imagen del paciente
@@ -99,32 +100,39 @@ elif selected_page == "Reconocimiento de Paciente":
 
         # Área de dibujo
         st.subheader("Área de Dibujo")
-        drawing_canvas = st.image([])
 
-        # Botón para habilitar/deshabilitar el dibujo
-        drawing_mode = st.checkbox("Modo de Dibujo", False)
+        # Configuración del área de dibujo
+        canvas_result = st_canvas(
+            fill_color="rgba(255, 165, 0, 0.3)",  # Color de relleno (opcional)
+            stroke_width=10,  # Grosor de línea
+            stroke_color="#FFA500",  # Color de línea
+            background_color="#FFF",  # Color de fondo
+            height=300,  # Altura del área de dibujo
+            drawing_mode="freedraw",  # Modo de dibujo libre
+            key="canvas",
+        )
 
-        if drawing_mode:
-            # Permitir al usuario dibujar en la imagen
-            with drawing_canvas:
-                try:
-                    # Obtener la imagen como un archivo
-                    image_file = patient_image.read()
-                    image = Image.open(io.BytesIO(image_file))
-        
-                    # Habilitar el dibujo
-                    draw = ImageDraw.Draw(image)
-                    drawn_image = st.image(image, caption="Imagen del paciente", use_column_width=True)
-        
-                    # Lógica de dibujo
-                    drawn_image.image = image
-        
-                    st.write("¡Haz tus anotaciones en la imagen!")
-                except Exception as e:
-                    st.error(f"Error al abrir la imagen: {str(e)}")
+        if canvas_result.image_data is not None:
+            # Obtener la imagen como un archivo
+            image_file = patient_image.read()
+            image = Image.open(io.BytesIO(image_file))
+
+            # Habilitar el dibujo
+            draw = ImageDraw.Draw(image)
+            drawn_image = st.image(image, caption="Imagen del paciente", use_column_width=True)
+
+            # Dibujar sobre la imagen
+            img = Image.open(io.BytesIO(canvas_result.image_data))
+            image.paste(img, (0, 0))
+
+            # Actualizar la imagen dibujada
+            drawn_image.image = image
+
+            st.write("¡Haz tus anotaciones en la imagen!")
 
         else:
             st.write("Habilita el modo de dibujo para hacer anotaciones en la imagen.")
+
 
 # Limpiar archivos antiguos
 remove_files(7)
