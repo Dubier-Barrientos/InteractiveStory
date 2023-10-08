@@ -196,9 +196,9 @@ elif selected_page == "Dibujemos una historia":
         st.success("Todas las imágenes borradas.")
 
     if historieta:
-    st.subheader("tus dibujos:")
-    for i, img in enumerate(historieta):
-        st.image(img, use_column_width=True, caption=f"Imagen {i + 1}")
+        st.subheader("tus dibujos:")
+        for i, img in enumerate(historieta):
+            st.image(img, use_column_width=True, caption=f"Imagen {i + 1}")
         
 
 
