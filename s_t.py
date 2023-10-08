@@ -36,7 +36,9 @@ if st.button("Guardar Dibujo"):
         
         historieta.append(image)
 
-        canvas_result.clear_drawing()
+        canvas_result._data = None
+
+        canvas_result.image = Image.new("RGB", (canvas_result.shape[1], canvas_result.shape[0]), "#FFF")
 
         st.image(image, use_column_width=True, caption=f"Imagen {len(historieta)}")
 
