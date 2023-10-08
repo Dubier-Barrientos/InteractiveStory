@@ -116,18 +116,22 @@ elif selected_page == "Reconocimiento de Paciente":
             # Obtener la imagen como un archivo
             image_file = patient_image.read()
             image = Image.open(io.BytesIO(image_file))
-
+    
             # Habilitar el dibujo
             draw = ImageDraw.Draw(image)
             drawn_image = st.image(image, caption="Imagen del paciente", use_column_width=True)
-
-            # Dibujar sobre la imagen
-            img = Image.open(io.BytesIO(canvas_result.image_data))
-            image.paste(img, (0, 0))
-
+    
+            # Convertir los datos de la imagen en formato PNG antes de abrirlo
+            img_data = canvas_result.image_data
+            img = Image.open(io.BytesIO(img_data))
+            img = img.convert("RGBA")
+    
+            # Pegar la imagen dibujada en la imagen original
+            image.paste(img, (0, 0), img)
+    
             # Actualizar la imagen dibujada
             drawn_image.image = image
-
+    
             st.write("¡Haz tus anotaciones en la imagen!")
 
         else:
