@@ -181,23 +181,19 @@ elif selected_page == "Dibujemos una historia":
     )
     
     
-    if st.button("Guardar Dibujo"):
+    if st.button("Guardar como PNG"):
         image_data = canvas_result.image_data
         if image_data is not None:
             image = Image.fromarray(np.uint8(image_data))
     
-            new_size = (300, 300)
-            image = image.resize(new_size)
+            # Guardar la imagen como PNG
+            image.save("canvas_image.png", "PNG")
             
-            historieta.append(image)
-    
-            st.image(image, use_column_width=True, caption=f"Imagen {len(historieta)}")
+            # Mostrar un enlace para descargar la imagen
+            st.markdown("Descarga la imagen generada:")
+            st.download_button(label="Descargar PNG", data=open("canvas_image.png", "rb").read(), file_name="canvas_image.png", key="download-button")
         else:
             st.warning("No hay dibujo para guardar.")
-
-    if st.button("Borrar imágenes"):
-        historieta.clear()
-        st.success("Todas las imágenes borradas.")
 
 
         
