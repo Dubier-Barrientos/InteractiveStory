@@ -28,6 +28,9 @@ if selected_page == "Historia a audio":
 
     st.markdown("<h1 style='text-align: center; color: blue;'>¡Atrévete a contar tu historia!</h1>", unsafe_allow_html=True)
 
+    image_writing = Image.open('gatito_escribiendo.gif')
+    st.image(image_writing)
+    
     # Texto de entrada del usuario
     text = st.text_input("¿Tienes algo para contar?")
     tld = "es"
