@@ -31,18 +31,21 @@ if selected_page == "Historia a audio":
     image_writing = Image.open('gatito_escribiendo.gif')
     #.image(image_writing)
 
-     # Crear una columna para centrar la imagen
-    col1, col2, col3 = st.beta_columns([1, 3, 1])  # Proporciones de las columnas
-    
-    # Dejar una columna vacía a la izquierda para centrar la imagen
-    col1.write("")
-    
-    # Mostrar la imagen en la columna central
-    with col2:
-        st.image(image_writing, use_column_width=True)
-    
-    # Dejar una columna vacía a la derecha
-    col3.write("")
+    st.markdown(
+        """
+        <style>
+        .centered-image {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # Mostrar la imagen centrada
+    st.image(image_writing, caption="Imagen Centrada", use_column_width=True, output_format="auto", key="centered-image")
     
     # Texto de entrada del usuario
     text = st.text_input("¿Tienes algo para contar?")
@@ -158,18 +161,21 @@ elif selected_page == "Dibujemos una historia":
     image_drawing = Image.open('gatito_dibujo.gif')
     #st.image(image_drawing)
     
-    # Crear una columna para centrar la imagen
-    col1, col2, col3 = st.beta_columns([1, 3, 1])  # Proporciones de las columnas
-    
-    # Dejar una columna vacía a la izquierda para centrar la imagen
-    col1.write("")
-    
-    # Mostrar la imagen en la columna central
-    with col2:
-        st.image(image_drawing, use_column_width=True)
-    
-    # Dejar una columna vacía a la derecha
-    col3.write("")
+    st.markdown(
+        """
+        <style>
+        .centered-image-two {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # Mostrar la imagen centrada
+    st.image(image_drawing, caption="Imagen Centrada", use_column_width=True, output_format="auto", key="centered-image-two")
 
     #Cambiar trazo y color
     stroke_width = st.sidebar.slider("Stroke width: ", 1, 25, 3)
