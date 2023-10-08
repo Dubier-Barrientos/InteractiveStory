@@ -7,6 +7,7 @@ import time
 import glob
 import os
 from gtts import gTTS
+from googletrans import Translator
 
 try:
     os.mkdir("temp")
@@ -24,12 +25,13 @@ st.set_page_config(
 selected_page = st.sidebar.radio("Selecciona una opción:", ["Historia a audio", "Dibujemos una historia"])
 
 if selected_page == "Historia a audio":
+
+    st.title("¡Atrévete a escribir tu historia!")
     
-    text = st.text_input("Ingrese el texto.")
+    text = st.text_input("¿Tienes algo para contar?")
     tld="es"
 
     def text_to_speech(text, tld):
-    
         tts = gTTS(text,"es", tld, slow=False)
         try:
             my_file_name = text[0:20]
@@ -51,6 +53,8 @@ if selected_page == "Historia a audio":
         st.write(f" {output_text}")
 
 
+    st.subheader("¡También puedes traducirla!")
+    
     
     def remove_files(n):
         mp3_files = glob.glob("temp/*mp3")
@@ -67,7 +71,7 @@ if selected_page == "Historia a audio":
 elif selected_page == "Dibujemos una historia":
     
     #Título de la sección
-    st.title("Historieta Interactiva")
+    st.title("¡Aquí puedes dibujar la historia que te imagines!")
 
     #Cambiar trazo y color
     stroke_width = st.sidebar.slider("Stroke width: ", 1, 25, 3)
