@@ -4,3 +4,7 @@ gTTS==2.2.2
 googletrans==3.1.0a0
 pytesseract
 wikipedia-api
+
+numpy>=1.22.2
+opencv-python-headless==4.5.5.64
+opencv-python>=4.1.1
