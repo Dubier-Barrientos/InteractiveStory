@@ -180,7 +180,8 @@ elif selected_page == "Dibujemos una historia":
 
     st.empty()
     
-    st.subheader("Lienzo de Dibujo")
+    st.markdown("<h6 style='text-align: center; color: #65cafc;'>¡Dibujemos una historia juntos!</h1>", unsafe_allow_html=True)
+    st.empty()
     canvas_result = st_canvas(
         fill_color="rgba(255, 255, 255, 0)", 
         stroke_width=stroke_width, 
