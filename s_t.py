@@ -171,7 +171,7 @@ elif selected_page == "Dibujemos una historia":
         stroke_width=stroke_width, 
         stroke_color=stroke_color,  
         background_color="#FFF",  
-        update_streamlit=realtime_update,
+        update_streamlit=True,
         drawing_mode=drawing_mode, 
         key="canvas",
         height=300,
