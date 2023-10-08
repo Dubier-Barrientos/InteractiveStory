@@ -31,22 +31,10 @@ if selected_page == "Historia a audio":
     image_writing = Image.open('gatito_escribiendo.gif')
     #.image(image_writing)
 
-    st.markdown(
-        """
-        <style>
-        .centered-image {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
+    left_co, cent_co,last_co = st.columns(3)
+        with cent_co:
+    st.image(image_writing)
 
-    # Mostrar la imagen centrada
-    st.image(image_writing, caption="Imagen Centrada", use_column_width=True, output_format="auto", key="centered-image")
-    
     # Texto de entrada del usuario
     text = st.text_input("¿Tienes algo para contar?")
     tld = "es"
@@ -161,21 +149,9 @@ elif selected_page == "Dibujemos una historia":
     image_drawing = Image.open('gatito_dibujo.gif')
     #st.image(image_drawing)
     
-    st.markdown(
-        """
-        <style>
-        .centered-image-two {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    # Mostrar la imagen centrada
-    st.image(image_drawing, caption="Imagen Centrada", use_column_width=True, output_format="auto", key="centered-image-two")
+    left_co, cent_co,last_co = st.columns(3)
+        with cent_co:
+    st.image(image_drawing)
 
     #Cambiar trazo y color
     stroke_width = st.sidebar.slider("Stroke width: ", 1, 25, 3)
