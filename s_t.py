@@ -3,6 +3,8 @@ from PIL import Image
 import pytesseract
 from gtts import gTTS
 import os
+import glob
+import time
 
 # Título de la aplicación
 st.title("Aplicación de Diagnóstico Médico")
@@ -15,6 +17,9 @@ image_file = st.file_uploader("Cargar imagen del diagnóstico (formato compatibl
 def extract_text(image):
     text = pytesseract.image_to_string(image)
     return text
+
+# Variable para almacenar el texto extraído
+text = ""
 
 if image_file is not None:
     # Mostrar la imagen cargada
@@ -32,32 +37,34 @@ if image_file is not None:
         st.subheader("Texto extraído de la imagen:")
         st.write(text)
 
-def text_to_speech(text, tld):
-    #translation = translator.translate(text, src=input_language, dest=output_language)
-    
-    tts = gTTS(text, "es", tld=tld, slow=False)
-    try:
-        my_file_name = text[0:20]
-    except:
-        my_file_name = "audio"
-    tts.save(f"temp/{my_file_name}.mp3")
-    return my_file_name, trans_text
+# Subir la imagen del diagnóstico
+tld = "com"  # Cambia esto al dominio TLD deseado (p. ej., "es" para español)
 
+# Botón para generar un audio con el texto
+if text:
+    if st.button("Generar audio"):
+        def text_to_speech(text, tld):
+            tts = gTTS(text, lang="es", tld=tld, slow=False)
+            try:
+                my_file_name = text[0:20]
+            except:
+                my_file_name = "audio"
+            tts.save(f"temp/{my_file_name}.mp3")
+            return my_file_name
 
-display_output_text = st.checkbox("Muestra el  texto ")
+        # Generar audio con el texto
+        result = text_to_speech(text, tld)
+        audio_file = open(f"temp/{result}.mp3", "rb")
+        audio_bytes = audio_file.read()
+        st.markdown(f"## Audio del diagnóstico:")
+        st.audio(audio_bytes, format="audio/mp3", start_time=0)
 
-if st.button("convert"):
-    result, output_text = text_to_speech("es", "es", text, tld)
-    audio_file = open(f"temp/{result}.mp3", "rb")
-    audio_bytes = audio_file.read()
-    st.markdown(f"## Your audio:")
-    st.audio(audio_bytes, format="audio/mp3", start_time=0)
+        # Botón para eliminar el audio generado
+        if st.button("Eliminar audio generado"):
+            os.remove(f"temp/{result}.mp3")
+            st.success("Audio eliminado correctamente.")
 
-    if display_output_text:
-        st.markdown(f"## Output text:")
-        st.write(f" {output_text}")
-
-
+# Botón para eliminar archivos antiguos
 def remove_files(n):
     mp3_files = glob.glob("temp/*mp3")
     if len(mp3_files) != 0:
@@ -66,10 +73,10 @@ def remove_files(n):
         for f in mp3_files:
             if os.stat(f).st_mtime < now - n_days:
                 os.remove(f)
-                print("Deleted ", f)
-
+                print("Deleted", f)
 
 remove_files(7)
+
             
 
            
