@@ -199,8 +199,9 @@ elif selected_page == "Dibujemos una historia":
     )
     
     st.empty()
-    
+
     st.markdown("---")
+    st.text("Puedes modificar los parámetros del trazo y del fondo, en el menú lateral izquierdo, para potenciar tu imaginación y creatividad")
 
     st.empty()
     
