@@ -35,8 +35,7 @@ if image_file is not None:
             st.markdown(f"## Audio del diagnóstico:")
             st.audio(audio_file, format="audio/mp3", start_time=0)
 
-            # Eliminar el archivo de audio después de generarlo
-            os.remove(audio_file)
+            
 
            
 
