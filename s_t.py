@@ -1,5 +1,5 @@
 import streamlit as st
-from PIL import Image
+from PIL import Image, ImageDraw
 import pytesseract
 from gtts import gTTS
 import os
