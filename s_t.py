@@ -24,17 +24,22 @@ if image_file is not None:
         st.subheader("Texto extraído de la imagen:")
         st.write(text)
 
-        # Botón para generar un audio con el texto
-        if st.button("Generar audio"):
-            # Generar audio con el texto
-            tts = gTTS(text, lang="es")  # Puedes especificar el idioma que desees
-            audio_file = "diagnostico_audio.mp3"
-            tts.save(audio_file)
+        # Guardar el texto en caché
+        st.cache(text)
 
-            # Mostrar el enlace para descargar el audio
-            st.markdown(f"## Audio del diagnóstico:")
-            st.audio(audio_file, format="audio/mp3", start_time=0)
+    # Botón para generar un audio con el texto
+    if st.button("Generar audio"):
+        # Recuperar el texto de la caché
+        text = st.cache(text)
 
+        # Generar audio con el texto
+        tts = gTTS(text, lang="es")  # Puedes especificar el idioma que desees
+        audio_file = "diagnostico_audio.mp3"
+        tts.save(audio_file)
+
+        # Mostrar el enlace para descargar el audio
+        st.markdown(f"## Audio del diagnóstico:")
+        st.audio(audio_file, format="audio/mp3", start_time=0)
             
 
            
