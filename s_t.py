@@ -173,7 +173,6 @@ elif selected_page == "Dibujemos una historia":
     stroke_width = st.sidebar.slider("Stroke width: ", 1, 25, 3)
     stroke_color = st.sidebar.color_picker("color de trazo: ")
     bg_color = st.sidebar.color_picker("Color de fondo: ", "#eee")
-    bg_image = st.sidebar.file_uploader("Deseas añadir una imagen al fondo?:", type=["png", "jpg"])
     
     st.empty()
     
@@ -188,7 +187,6 @@ elif selected_page == "Dibujemos una historia":
         stroke_width=stroke_width, 
         stroke_color=stroke_color,  
         background_color=bg_color, 
-        background_image=Image.open(bg_image) if bg_image else None,
         update_streamlit=True,
         drawing_mode=drawing_mode, 
         key="canvas",
