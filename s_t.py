@@ -1,57 +1,27 @@
 import streamlit as st
 from streamlit_drawable_canvas import st_canvas
-from PIL import Image, ImageDraw
-import io
-import numpy as np
 
-historieta = []
+st.title("Drawable Canvas")
+st.markdown("""
+Draw on the canvas, get the image data back into Python !
+* Doubleclick to remove the selected object when not in drawing mode
+""")
+st.sidebar.header("Configuration")
 
-st.set_page_config(
-    page_title="Creación de Historieta",
-    page_icon="✏️",
-    layout="wide"
+# Specify brush parameters and drawing mode
+b_width = st.sidebar.slider("Brush width: ", 1, 100, 10)
+b_color = st.sidebar.beta_color_picker("Enter brush color hex: ")
+bg_color = st.sidebar.beta_color_picker("Enter background color hex: ", "#eee")
+drawing_mode = st.sidebar.checkbox("Drawing mode ?", True)
+
+# Create a canvas component
+image_data = st_canvas(
+    b_width, b_color, bg_color, height=150, drawing_mode=drawing_mode, key="canvas"
 )
 
-st.title("Historieta Interactiva")
-
-st.subheader("Lienzo de Dibujo")
-canvas_result = st_canvas(
-    fill_color="rgba(255, 255, 255, 0)",  # Color de fondo transparente
-    stroke_width=5,  # Grosor de la línea
-    stroke_color="#000",  # Color de línea (negro)
-    background_color="#FFF",  # Color de fondo blanco
-    drawing_mode="freedraw",  # Modo de dibujo libre
-    key="canvas",
-    height=300  # Altura del lienzo de dibujo
-)
-
-if st.button("Guardar Dibujo"):
-    image_data = canvas_result.image_data
-    if image_data is not None:
-        image = Image.fromarray(np.uint8(image_data))
-
-        # Redimensionar la imagen
-        new_size = (300, 300)
-        image = image.resize(new_size)
-
-        # Guardar la imagen en un buffer de bytes
-        img_buffer = io.BytesIO()
-        image.save(img_buffer, format="PNG")
-
-        # Agregar la imagen al historial
-        historieta.append(img_buffer.getvalue())
-
-        st.image(image, use_column_width=True, caption=f"Imagen {len(historieta)}")
-
-        if st.button(f"Borrar Imagen {len(historieta)}"):
-            del historieta[-1]
-            st.success(f"Imagen {len(historieta) + 1} borrada.")
-    else:
-        st.warning("No hay dibujo para guardar.")
-
-if st.button("Borrar Todas las Imágenes"):
-    historieta.clear()
-    st.success("Todas las imágenes borradas.")
+# Do something interesting with the image data
+if image_data is not None:
+    st.image(image_data)
 
 
 
