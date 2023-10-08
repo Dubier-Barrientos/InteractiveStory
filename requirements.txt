@@ -5,3 +5,4 @@ googletrans==3.1.0a0
 pytesseract
 
 streamlit-drawable-canvas==0.5.0
+numpy>=1.22.2
