@@ -81,7 +81,7 @@ if selected_page == "Cuenta y escucha":
     # Idioma de entrada y salida
     in_lang = st.selectbox(
         "Selecciona el lenguaje de Entrada",
-        ("Inglés", "Español", "Bengalí", "Coreano", "Mandarín", "Japonés", "Italiano"),
+        ("Español", "Inglés", "Bengalí", "Coreano", "Mandarín", "Japonés", "Italiano"),
     )
     if in_lang == "Español":
         input_language = "es"
