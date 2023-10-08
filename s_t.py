@@ -39,11 +39,11 @@ if selected_page == "Cuenta y escucha":
 
     # Texto de entrada del usuario
     text = st.text_input("¿Tienes algo para contar?")
-    tld = "com.mx"
+    tld = "es"
     
     # Función para convertir texto a audio
     def text_to_speech(text, tld):
-        tts = gTTS(text, "es-MX", tld, slow=False)
+        tts = gTTS(text, "es", tld, slow=False)
         try:
             my_file_name = text[0:20]
         except:
