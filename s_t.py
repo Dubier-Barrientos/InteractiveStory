@@ -21,10 +21,6 @@ st.set_page_config(
     layout="wide"
 )
 
-#Cambiar trazo y color
-stroke_width = st.sidebar.slider("Stroke width: ", 1, 25, 3)
-stroke_color = st.sidebar.color_picker("Stroke color hex: ")
-
 selected_page = st.sidebar.radio("Selecciona una opción:", ["Historia a audio", "Dibujemos una historia"])
 
 if selected_page == "Historia a audio":
@@ -72,6 +68,10 @@ elif selected_page == "Dibujemos una historia":
     
     #Título de la sección
     st.title("Historieta Interactiva")
+
+    #Cambiar trazo y color
+    stroke_width = st.sidebar.slider("Stroke width: ", 1, 25, 3)
+    stroke_color = st.sidebar.color_picker("Stroke color hex: ")
     
     st.subheader("Lienzo de Dibujo")
     canvas_result = st_canvas(
