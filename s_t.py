@@ -26,7 +26,9 @@ selected_page = st.sidebar.radio("Selecciona una opción:", ["Historia a audio",
 
 if selected_page == "Historia a audio":
 
-    st.markdown("<h1 style='text-align: center; color: #65cafc; margin-bottom: 45px;'>¡Atrévete a contar tu historia!</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: #65cafc;'>¡Atrévete a contar tu historia!</h1>", unsafe_allow_html=True)
+
+    st.text(" ")
     
     image_writing = Image.open('write.jpg')
     #.image(image_writing)
@@ -153,9 +155,11 @@ if selected_page == "Historia a audio":
 elif selected_page == "Dibujemos una historia":
     
     #Título de la sección
-    st.markdown("<h1 style='text-align: center; color: #65cafc; margin-bottom: 30px;'>¡Dibujemos una historia juntos!</h1>", unsafe_allow_html=True)
-    st.markdown("<h4 style='text-align: center; color: #fff; margin-bottom: 45px;'>Un lienzo en blanco te espera para que compartas tu creatividad. ¿Te atreves a contarnos tu historia en un dibujo?</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: #65cafc; margin-bottom: 20px;'>¡Dibujemos una historia juntos!</h1>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: #fff;'>Un lienzo en blanco te espera para que compartas tu creatividad. ¿Te atreves a contarnos tu historia en un dibujo?</h1>", unsafe_allow_html=True)
 
+    st.text(" ")
+    
     image_drawing = Image.open('draw.jpg')
     #st.image(image_drawing)
     
