@@ -26,7 +26,7 @@ selected_page = st.sidebar.radio("Selecciona una opción:", ["Historia a audio",
 
 if selected_page == "Historia a audio":
 
-    st.title("¡Atrévete a escribir tu historia!")
+    st.markdown("<h1 style='text-align: center; color: blue;'>¡Atrévete a contar tu historia!</h1>", unsafe_allow_html=True)
 
     # Texto de entrada del usuario
     text = st.text_input("¿Tienes algo para contar?")
