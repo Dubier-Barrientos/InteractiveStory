@@ -89,6 +89,39 @@ elif selected_page == "Reconocimiento de Paciente":
       # Título de la sección
     st.title("Reconocimiento de Paciente")
 
+    # Subir la imagen del paciente
+    patient_image = st.file_uploader("Cargar imagen del paciente", type=["png", "jpg", "jpeg"])
+
+    if patient_image is not None:
+        # Mostrar la imagen cargada
+        st.image(patient_image, caption="Imagen del paciente", use_column_width=True)
+
+        # Área de dibujo
+        st.subheader("Área de Dibujo")
+        drawing_canvas = st.image([])
+
+        # Botón para habilitar/deshabilitar el dibujo
+        drawing_mode = st.checkbox("Modo de Dibujo", False)
+
+        if drawing_mode:
+            # Permitir al usuario dibujar en la imagen
+            with drawing_canvas:
+                # Obtener la imagen como un archivo
+                image_file = patient_image.read()
+                image = Image.open(io.BytesIO(image_file))
+
+                # Habilitar el dibujo
+                draw = ImageDraw.Draw(image)
+                drawn_image = st.image(image, caption="Imagen del paciente", use_column_width=True)
+
+                # Lógica de dibujo
+                drawn_image.image = image
+
+                st.write("¡Haz tus anotaciones en la imagen!")
+
+        else:
+            st.write("Habilita el modo de dibujo para hacer anotaciones en la imagen.")
+
 # Limpiar archivos antiguos
 remove_files(7)
 
