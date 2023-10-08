@@ -57,10 +57,6 @@ if selected_page == "Historia a audio":
         st.markdown(f"## Tú audio:")
         st.audio(audio_bytes, format="audio/mp3", start_time=0)
     
-        # Muestra el texto en audio
-        st.markdown(f"## Texto en Audio:")
-        st.write(f" {output_text}")
-    
     st.subheader("¡También puedes traducirlo!")
     
     # Resultado de la traducción
@@ -112,6 +108,8 @@ if selected_page == "Historia a audio":
         output_language = "ja"
     elif out_lang == "Italiano":
         output_language = "it"
+
+    display_output_text = st.checkbox("Mostrar el texto")
     
     # Botón para traducir el texto
     if st.button("Traducir"):
